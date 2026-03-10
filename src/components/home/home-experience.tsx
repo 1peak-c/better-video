@@ -24,7 +24,11 @@ export function HomeExperience() {
         onValueChange={(value) => setActiveTab(value as AppTab)}
         className="gap-0"
       >
-        <TopNav items={navItems} />
+        <TopNav
+          items={navItems}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
         <TabsContent value="新闻">
           <NewsPage />
         </TabsContent>
