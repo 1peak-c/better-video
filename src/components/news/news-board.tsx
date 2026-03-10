@@ -1,6 +1,15 @@
 import Image from "next/image";
 import { NEWS_SOURCE_META } from "@/lib/news/sources";
 import type { NewsBoard as NewsBoardData } from "@/types/news";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 type NewsBoardProps = {
   board: NewsBoardData;
@@ -10,8 +19,11 @@ export function NewsBoard({ board }: NewsBoardProps) {
   const source = NEWS_SOURCE_META[board.id];
 
   return (
-    <article className="glass-panel rounded-[26px] px-4 py-4 sm:px-5">
-      <header className="flex items-center justify-between gap-3 border-b border-white/10 pb-3">
+    <Card
+      size="sm"
+      className="glass-panel rounded-[26px] border-white/10 bg-transparent py-0 text-white shadow-none"
+    >
+      <CardHeader className="border-b border-white/10 px-4 py-4 sm:px-5">
         <div className="flex min-w-0 items-center gap-3">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white/6">
             <Image
@@ -24,30 +36,40 @@ export function NewsBoard({ board }: NewsBoardProps) {
             />
           </div>
           <div className="min-w-0">
-            <h3 className="truncate text-base font-semibold text-white">
+            <CardTitle className="truncate text-base font-semibold text-white">
               {source.name}
-            </h3>
+            </CardTitle>
             <p className="text-xs text-white/42">
               {board.updatedAt ?? "实时更新"}
             </p>
           </div>
         </div>
-        <a
-          href={source.officialUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="shrink-0 text-xs text-white/42 transition hover:text-white"
-        >
-          源站
-        </a>
-      </header>
+        <CardAction>
+          <Badge
+            variant="outline"
+            render={
+              <a
+                href={source.officialUrl}
+                target="_blank"
+                rel="noreferrer"
+              />
+            }
+            className="border-white/10 bg-white/6 text-white/70 hover:bg-white/10 hover:text-white"
+          >
+            源站
+          </Badge>
+        </CardAction>
+      </CardHeader>
 
       {board.error ? (
-        <div className="py-6 text-sm leading-6 text-white/60">{board.error}</div>
+        <CardContent className="px-4 py-6 text-sm leading-6 text-white/60 sm:px-5">
+          {board.error}
+        </CardContent>
       ) : (
-        <ol className="mt-3">
+        <CardContent className="px-4 pb-1 pt-2 sm:px-5">
+          <ol>
           {board.items.slice(0, 8).map((item, index) => (
-            <li key={`${board.id}-${index}`} className="border-b border-white/8 last:border-b-0">
+            <li key={`${board.id}-${index}`}>
               <a
                 href={item.url}
                 target="_blank"
@@ -68,10 +90,14 @@ export function NewsBoard({ board }: NewsBoardProps) {
                   </div>
                 </div>
               </a>
+              {index < Math.min(board.items.length, 8) - 1 ? (
+                <Separator className="bg-white/8" />
+              ) : null}
             </li>
           ))}
-        </ol>
+          </ol>
+        </CardContent>
       )}
-    </article>
+    </Card>
   );
 }

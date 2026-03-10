@@ -1,4 +1,5 @@
 import { SectionHeader } from "@/components/common/section-header";
+import { Button } from "@/components/ui/button";
 
 const trendingNow = [
   {
@@ -87,12 +88,15 @@ export function VideoPage() {
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row">
-              <button className="rounded-full bg-orange-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-400">
+              <Button className="rounded-full bg-orange-500 px-5 py-3 text-sm font-semibold text-white hover:bg-orange-400">
                 播放主推内容
-              </button>
-              <button className="rounded-full border border-white/12 bg-white/6 px-5 py-3 text-sm font-semibold text-white/85 transition hover:bg-white/10">
+              </Button>
+              <Button
+                variant="outline"
+                className="rounded-full border-white/12 bg-white/6 px-5 py-3 text-sm font-semibold text-white/85 hover:bg-white/10 hover:text-white dark:bg-white/6 dark:hover:bg-white/10"
+              >
                 浏览片库
-              </button>
+              </Button>
             </div>
 
             <div className="grid grid-cols-3 gap-3">
@@ -132,9 +136,13 @@ export function VideoPage() {
                   <p className="text-sm text-white">第 1 集将于 20:00 上线</p>
                   <p className="text-xs text-white/45">剧情 • 52 分钟 • 杜比全景声</p>
                 </div>
-                <button className="rounded-full border border-white/12 px-3 py-2 text-xs tracking-[0.2em] text-white/75 transition hover:bg-white/10">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="rounded-full border-white/12 text-xs tracking-[0.2em] text-white/75 hover:bg-white/10 hover:text-white"
+                >
                   加入片单
-                </button>
+                </Button>
               </div>
             </div>
           </div>

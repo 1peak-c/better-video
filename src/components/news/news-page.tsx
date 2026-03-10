@@ -3,6 +3,8 @@
 import { useEffect, useState, startTransition } from "react";
 import { SectionHeader } from "@/components/common/section-header";
 import { NewsBoard } from "@/components/news/news-board";
+import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { fetchNewsBoards } from "@/lib/news/client";
 import type { NewsBoard as NewsBoardData } from "@/types/news";
 
@@ -70,28 +72,33 @@ export function NewsPage() {
       {state.status === "loading" ? (
         <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
           {Array.from({ length: 6 }).map((_, index) => (
-            <div
+            <Card
               key={index}
-              className="glass-panel rounded-[26px] px-4 py-4 sm:px-5"
+              size="sm"
+              className="glass-panel rounded-[26px] border-white/10 bg-transparent py-0 shadow-none"
             >
-              <div className="h-11 animate-pulse rounded-2xl bg-white/6" />
-              <div className="mt-4 space-y-3">
+              <CardContent className="px-4 py-4 sm:px-5">
+                <Skeleton className="h-11 rounded-2xl bg-white/6" />
+                <div className="mt-4 space-y-3">
                 {Array.from({ length: 8 }).map((__, itemIndex) => (
-                  <div
+                  <Skeleton
                     key={itemIndex}
-                    className="h-6 animate-pulse rounded-full bg-white/6"
+                    className="h-6 rounded-full bg-white/6"
                   />
                 ))}
-              </div>
-            </div>
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       ) : null}
 
       {state.status === "error" ? (
-        <div className="glass-panel rounded-[26px] px-5 py-6 text-sm leading-7 text-white/70">
-          {state.error}
-        </div>
+        <Card className="glass-panel rounded-[26px] border-white/10 bg-transparent py-0 shadow-none">
+          <CardContent className="px-5 py-6 text-sm leading-7 text-white/70">
+            {state.error}
+          </CardContent>
+        </Card>
       ) : null}
 
       {state.status === "success" ? (

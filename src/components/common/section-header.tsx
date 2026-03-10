@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 type SectionHeaderProps = {
   eyebrow: string;
   title: string;
@@ -18,9 +20,13 @@ export function SectionHeader({
         </h2>
       </div>
       {action ? (
-        <button className="hidden rounded-full border border-white/12 bg-white/6 px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 sm:block">
+        <Button
+          variant="outline"
+          size="sm"
+          className="hidden rounded-full border-white/12 bg-white/6 text-white/80 hover:bg-white/10 hover:text-white sm:inline-flex dark:bg-white/6 dark:hover:bg-white/10"
+        >
           {action}
-        </button>
+        </Button>
       ) : null}
     </div>
   );
