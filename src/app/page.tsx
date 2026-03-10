@@ -64,6 +64,8 @@ const liveDrops = [
   { title: "午夜现场", viewers: "9100 人观看", status: "直播中" },
 ];
 
+const navItems = ["新闻", "影视", "音乐", "我的"];
+
 function SectionHeader({
   eyebrow,
   title,
@@ -92,24 +94,28 @@ function SectionHeader({
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden pb-24">
+    <main className="relative min-h-screen overflow-hidden pb-16 pt-24 sm:pt-28">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[26rem] bg-[radial-gradient(circle_at_top,rgba(76,201,240,0.24),transparent_42%)]" />
       <div className="pointer-events-none absolute right-[-8rem] top-32 h-72 w-72 rounded-full bg-orange-500/12 blur-3xl" />
 
-      <header className="sticky top-0 z-30 border-b border-white/8 bg-slate-950/60 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
-          <div>
-            <p className="font-display text-xl tracking-[0.18em] text-white">映潮</p>
-            <p className="text-xs text-white/50">随时观看你想看的内容</p>
-          </div>
-          <div className="hidden items-center gap-3 md:flex">
-            <button className="rounded-full border border-white/10 px-4 py-2 text-sm text-white/70 transition hover:border-white/20 hover:text-white">
-              发现内容
-            </button>
-            <button className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-orange-200">
-              免费开看
-            </button>
-          </div>
+      <header className="fixed inset-x-0 top-0 z-40 px-4 pt-4 sm:px-6">
+        <div className="mx-auto max-w-4xl rounded-full border border-white/12 bg-slate-950/72 px-2 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.28)] backdrop-blur-xl">
+          <nav aria-label="主导航">
+            <ul className="grid grid-cols-4 gap-1 text-center text-sm tracking-[0.18em] text-white/62">
+              {navItems.map((item, index) => (
+                <li
+                  key={item}
+                  className={
+                    index === 0
+                      ? "rounded-full bg-white/10 px-2 py-3 font-semibold text-white"
+                      : "rounded-full px-2 py-3 transition hover:bg-white/8 hover:text-white"
+                  }
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
       </header>
 
@@ -309,14 +315,6 @@ export default function Home() {
         </section>
       </div>
 
-      <nav className="fixed inset-x-4 bottom-4 z-40 rounded-full border border-white/12 bg-slate-950/88 px-3 py-2 backdrop-blur-xl md:hidden">
-        <ul className="grid grid-cols-4 text-center text-[11px] tracking-[0.18em] text-white/55">
-          <li className="rounded-full bg-white/8 py-3 text-white">首页</li>
-          <li className="py-3">发现</li>
-          <li className="py-3">直播</li>
-          <li className="py-3">片库</li>
-        </ul>
-      </nav>
     </main>
   );
 }
