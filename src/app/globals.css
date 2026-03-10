@@ -1,1 +1,118 @@
 @import "tailwindcss";
+
+:root {
+  --background: #07111f;
+  --foreground: #f5f7fb;
+  --font-sans:
+    "Avenir Next", "Segoe UI", "Helvetica Neue", "Nimbus Sans", Arial, sans-serif;
+  --font-display:
+    "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Times New Roman", serif;
+}
+
+html {
+  background: var(--background);
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(76, 201, 240, 0.2), transparent 28%),
+    radial-gradient(circle at top right, rgba(255, 107, 74, 0.18), transparent 24%),
+    radial-gradient(circle at bottom center, rgba(255, 209, 102, 0.12), transparent 32%),
+    linear-gradient(180deg, #08111f 0%, #050a14 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.14;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at center, black 35%, transparent 78%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: rgba(255, 107, 74, 0.35);
+  color: #fff;
+}
+
+.glass-panel {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(22px);
+}
+
+.poster-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.poster-sheen::after {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background: linear-gradient(
+    120deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.16) 48%,
+    transparent 58%
+  );
+  transform: translateX(-120%) rotate(8deg);
+  animation: poster-sheen 8s ease-in-out infinite;
+}
+
+.float-card {
+  animation: float-card 7s ease-in-out infinite;
+}
+
+.font-display {
+  font-family: var(--font-display), sans-serif;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@keyframes poster-sheen {
+  0%,
+  72%,
+  100% {
+    transform: translateX(-120%) rotate(8deg);
+  }
+
+  84% {
+    transform: translateX(120%) rotate(8deg);
+  }
+}
+
+@keyframes float-card {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
